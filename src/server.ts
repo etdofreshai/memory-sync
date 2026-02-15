@@ -12,7 +12,7 @@ dotenv.config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-const PORT = parseInt(process.env.PORT || "3001");
+const PORT = parseInt(process.env.BACKEND_PORT || process.env.PORT || "3001");
 const UPLOAD_DIR = process.env.UPLOAD_DIR || path.join(__dirname, "..", "uploads");
 
 const upload = multer({ dest: UPLOAD_DIR });
