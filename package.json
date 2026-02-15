@@ -4,8 +4,10 @@
   "description": "Sync chat platforms and files to PostgreSQL + storage",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "build": "tsc",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "tsx watch src/server.ts",
+    "dev:frontend": "vite",
+    "build": "npx tsc && npx vite build",
     "start": "node dist/server.js",
     "sync:discord": "tsx src/syncs/discord.ts",
     "sync:slack": "tsx src/syncs/slack.ts",
@@ -15,21 +17,28 @@
     "sync:openai": "tsx src/syncs/openai.ts"
   },
   "dependencies": {
-    "pg": "^8.13.0",
+    "@slack/web-api": "^7.0.0",
+    "better-sqlite3": "^11.0.0",
+    "discord.js": "^14.16.0",
+    "dotenv": "^16.4.0",
     "express": "^5.0.0",
     "multer": "^1.4.5-lts.1",
-    "dotenv": "^16.4.0",
-    "discord.js": "^14.16.0",
-    "@slack/web-api": "^7.0.0",
-    "better-sqlite3": "^11.0.0"
+    "pg": "^8.13.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^6.0.0"
   },
   "devDependencies": {
-    "tsx": "^4.21.0",
-    "typescript": "^5.7.0",
-    "@types/node": "^22.0.0",
-    "@types/pg": "^8.11.0",
+    "@types/better-sqlite3": "^7.6.0",
     "@types/express": "^5.0.0",
     "@types/multer": "^1.4.0",
-    "@types/better-sqlite3": "^7.6.0"
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.11.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "concurrently": "^9.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }

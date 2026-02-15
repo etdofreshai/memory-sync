@@ -1,0 +1,163 @@
+.messages {
+  max-width: 1000px;
+}
+
+.messages h1 {
+  margin-bottom: 2rem;
+}
+
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.search-form input {
+  flex: 1;
+  min-width: 150px;
+  padding: 0.75rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.875rem;
+}
+
+.search-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.search-form button {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  color: var(--bg-base);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.search-form button:hover {
+  background: var(--accent-hover);
+}
+
+.messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.message-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.message-card:hover {
+  border-color: var(--accent);
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.message-source {
+  background: var(--bg-overlay);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.message-timestamp {
+  color: var(--text-dim);
+}
+
+.message-participants {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-dim);
+}
+
+.sender {
+  color: var(--success);
+  font-weight: 500;
+}
+
+.arrow {
+  color: var(--text-dim);
+}
+
+.recipient {
+  color: var(--accent-hover);
+  font-weight: 500;
+}
+
+.message-content {
+  color: var(--text);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.pagination button {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--bg-base);
+  border-color: var(--accent);
+}
+
+.pagination button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  color: var(--text-dim);
+  font-size: 0.875rem;
+}
+
+.loading,
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-dim);
+}
+
+@media (max-width: 768px) {
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-form input {
+    min-width: 100%;
+  }
+}

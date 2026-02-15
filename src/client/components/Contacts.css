@@ -1,0 +1,126 @@
+.contacts {
+  max-width: 1200px;
+}
+
+.contacts h1 {
+  margin-bottom: 2rem;
+}
+
+.contacts .search-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.contacts .search-form input {
+  flex: 1;
+  padding: 0.75rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.875rem;
+}
+
+.contacts .search-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.contacts .search-form button {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  color: var(--bg-base);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.contacts .search-form button:hover {
+  background: var(--accent-hover);
+}
+
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.contact-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.contact-card:hover {
+  border-color: var(--accent);
+}
+
+.contact-card h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text);
+  font-size: 1.25rem;
+}
+
+.contact-aliases,
+.contact-relationships {
+  margin-top: 1rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.alias {
+  display: inline-block;
+  background: var(--bg-overlay);
+  color: var(--accent);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.relationships-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.relationship {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.rel-key {
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.rel-value {
+  color: var(--text);
+}
+
+.loading,
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-dim);
+}
+
+@media (max-width: 768px) {
+  .contacts-grid {
+    grid-template-columns: 1fr;
+  }
+}
