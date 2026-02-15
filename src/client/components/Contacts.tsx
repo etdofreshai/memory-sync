@@ -24,7 +24,7 @@ export default function Contacts() {
       const params = new URLSearchParams();
       if (search) params.set('search', search);
 
-      const res = await fetch(`/api/contacts?${params}`);
+      const res = await fetch(`${import.meta.env.BASE_URL}api/contacts?${params}`);
       if (!res.ok) throw new Error(`Error: ${res.status}`);
       const data = await res.json();
       setContacts(data);

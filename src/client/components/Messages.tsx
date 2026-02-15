@@ -36,7 +36,7 @@ export default function Messages() {
       params.set('limit', String(limit));
       params.set('offset', String(offset));
 
-      const res = await fetch(`/api/messages?${params}`);
+      const res = await fetch(`${import.meta.env.BASE_URL}api/messages?${params}`);
       if (!res.ok) throw new Error(`Error: ${res.status}`);
       const data = await res.json();
       setMessages(data);

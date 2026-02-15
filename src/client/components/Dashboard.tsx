@@ -23,7 +23,7 @@ export default function Dashboard() {
   async function fetchStats() {
     try {
       setLoading(true);
-      const res = await fetch('/api/stats');
+      const res = await fetch(import.meta.env.BASE_URL + 'api/stats');
       if (!res.ok) throw new Error(`Error: ${res.status}`);
       const data = await res.json();
       setStats(data);

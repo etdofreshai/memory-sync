@@ -47,7 +47,7 @@ export default function Upload() {
       const formData = new FormData();
       formData.append('file', file);
 
-      const res = await fetch(`/api/upload/${uploadType}`, {
+      const res = await fetch(`${import.meta.env.BASE_URL}api/upload/${uploadType}`, {
         method: 'POST',
         body: formData,
       });
