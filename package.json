@@ -10,7 +10,9 @@
     "sync:discord": "tsx src/syncs/discord.ts",
     "sync:slack": "tsx src/syncs/slack.ts",
     "sync:imessage": "tsx src/syncs/imessage.ts",
-    "sync:whatsapp": "tsx src/syncs/whatsapp.ts"
+    "sync:whatsapp": "tsx src/syncs/whatsapp.ts",
+    "sync:anthropic": "tsx src/syncs/anthropic.ts",
+    "sync:openai": "tsx src/syncs/openai.ts"
   },
   "dependencies": {
     "pg": "^8.13.0",

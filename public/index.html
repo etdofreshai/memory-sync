@@ -61,10 +61,7 @@
 
   <div class="card">
     <h2>🔄 Live Syncs</h2>
-    <div class="row">
-      <button class="btn-sync" onclick="runSync('discord')">Sync Discord</button>
-      <button class="btn-sync" onclick="runSync('slack')">Sync Slack</button>
-    </div>
+    <div id="syncServices"></div>
     <div class="log" id="syncLog"></div>
   </div>
 
@@ -126,13 +123,45 @@
         } else {
           log('syncLog', `❌ ${platform}: ${data.error}`, 'error');
         }
-        loadStats();
+        loadStats(); loadSyncStatus();
       } catch (e) {
         log('syncLog', `❌ ${e.message}`, 'error');
+        loadSyncStatus();
       }
     }
 
+    const SERVICES = [
+      { id: 'discord', label: 'Discord', icon: '💬' },
+      { id: 'slack', label: 'Slack', icon: '📨' },
+      { id: 'anthropic', label: 'Anthropic', icon: '🤖' },
+      { id: 'openai', label: 'OpenAI', icon: '🧠' },
+    ];
+
+    function renderServices(statuses) {
+      const statusMap = {};
+      for (const s of statuses) statusMap[s.service] = s;
+      const el = document.getElementById('syncServices');
+      el.innerHTML = SERVICES.map(svc => {
+        const st = statusMap[svc.id];
+        const lastSync = st?.last_sync_at ? new Date(st.last_sync_at).toLocaleString() : 'Never';
+        const status = st?.is_running ? '🔄 Running' : st?.last_status === 'ok' ? '✅ OK' : st?.last_status === 'error' ? '❌ Error' : '⏸️ Idle';
+        const inserted = st?.last_inserted || 0;
+        const total = st?.total_synced || 0;
+        return `<div style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;border-bottom:1px solid #21262d">
+          <span>${svc.icon} <strong>${svc.label}</strong> — ${status} — Last: ${lastSync} (${inserted} last / ${total} total)</span>
+          <button class="btn-sync" onclick="runSync('${svc.id}')" ${st?.is_running ? 'disabled' : ''}>Sync</button>
+        </div>`;
+      }).join('');
+    }
+
+    async function loadSyncStatus() {
+      try { const res = await fetch('/api/sync/status'); renderServices(await res.json()); }
+      catch { renderServices([]); }
+    }
+
     loadStats();
+    loadSyncStatus();
+    setInterval(() => { loadStats(); loadSyncStatus(); }, 10000);
   </script>
 </body>
 </html>

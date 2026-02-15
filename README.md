@@ -10,6 +10,8 @@ Sync chat platforms and files to PostgreSQL. Standalone service — runs indepen
 | **Discord** | Bot token, live sync | ✅ Ready |
 | **Slack** | Bot token, live sync | ✅ Ready |
 | **WhatsApp** | Upload chat export `.txt` | ✅ Ready |
+| **Anthropic** | API key, live sync | ✅ Ready |
+| **OpenAI** | API key, live sync | ✅ Ready |
 
 ## Setup
 
@@ -36,12 +38,29 @@ npm run sync:slack
 
 # Upload WhatsApp export
 npm run sync:whatsapp -- path/to/chat.txt "Chat Name"
+
+# Sync Anthropic conversations
+npm run sync:anthropic
+
+# Sync OpenAI conversations
+npm run sync:openai
 ```
 
 ## API
 
-- `GET /api/stats` — Database statistics
+### Stats & Status
+- `GET /api/stats` — Database statistics by source
+- `GET /api/sync/status` — All services sync status (last sync, inserted count, errors)
+- `GET /api/sync/status/:service` — Single service status
+
+### File Uploads
 - `POST /api/upload/imessage` — Upload chat.db (multipart)
-- `POST /api/upload/whatsapp` — Upload chat export (multipart)
+- `POST /api/upload/whatsapp` — Upload chat export (multipart, optional `chatName` field)
+
+### Trigger Syncs
 - `POST /api/sync/discord` — Trigger Discord sync
 - `POST /api/sync/slack` — Trigger Slack sync
+- `POST /api/sync/anthropic` — Trigger Anthropic sync
+- `POST /api/sync/openai` — Trigger OpenAI sync
+
+Each sync tracks state in PostgreSQL (`sync_state` table): last sync time, status, inserted count, errors, total synced, and running state.
