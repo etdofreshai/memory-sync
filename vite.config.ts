@@ -30,7 +30,7 @@ export default defineConfig({
   plugins: [react(), autoBackend()],
   server: {
     allowedHosts: true,
-    port: parseInt(process.env.PORT || '5173'),
+    // Don't set port here — let CLI --port flag control it (Live Edit passes --port {assigned})
     proxy: {
       '/api': {
         target: `http://localhost:${backendPort}`,
