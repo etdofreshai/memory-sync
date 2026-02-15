@@ -9,12 +9,14 @@ function autoBackend(): Plugin {
   return {
     name: 'auto-backend',
     configureServer() {
+      console.log(`[auto-backend] Starting Express on port ${backendPort}...`);
       proc = spawn('npx', ['tsx', 'src/server.ts'], {
         stdio: 'inherit',
         env: { ...process.env, BACKEND_PORT: backendPort, PORT: backendPort },
         shell: true,
       });
       proc.on('error', (err) => console.error('[auto-backend] Failed to start:', err));
+      proc.on('exit', (code) => console.log(`[auto-backend] Exited with code ${code}`));
     },
     buildEnd() {
       if (proc) { proc.kill(); proc = null; }
@@ -33,6 +35,12 @@ export default defineConfig({
       '/api': {
         target: `http://localhost:${backendPort}`,
         changeOrigin: true,
+      },
+      // Also match when accessed through Live Edit's --base prefix
+      '^/proxy/\\d+/api': {
+        target: `http://localhost:${backendPort}`,
+        changeOrigin: true,
+        rewrite: (path: string) => path.replace(/^\/proxy\/\d+/, ''),
       },
     },
   },
